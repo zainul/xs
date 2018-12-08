@@ -5,6 +5,7 @@ import (
 	"fmt"
 
 	"github.com/BurntSushi/toml"
+	_ "github.com/lib/pq"
 )
 
 var conf Config

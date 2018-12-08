@@ -2,6 +2,10 @@ package deliveryerror
 
 import "github.com/zainul/xs/internal/pkg/error/usecaseerror"
 
+const (
+	BadRequest = "Bad Request"
+)
+
 // Error ...
 type Error struct {
 	ErrorCode string `json:"error_code"`
@@ -11,10 +15,12 @@ type Error struct {
 
 // GetError ...
 func GetError(errMsg string, caseError error) *Error {
-	err := Error{}
-	err.ErrorCode = usecaseerror.GetCode(errMsg)
-	err.ErrorMsg = errMsg
-	err.ErrorCase = caseError.Error()
-
-	return &err
+	if caseError != nil {
+		err := Error{}
+		err.ErrorCode = usecaseerror.GetCode(errMsg)
+		err.ErrorMsg = errMsg
+		err.ErrorCase = caseError.Error()
+		return &err
+	}
+	return nil
 }

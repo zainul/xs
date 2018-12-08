@@ -2,7 +2,15 @@ package domain
 
 import (
 	"time"
+
+	validator "gopkg.in/go-playground/validator.v9"
 )
+
+var validate *validator.Validate
+
+func init() {
+	validate = validator.New()
+}
 
 // User is represented of the user
 type User struct {
@@ -18,4 +26,9 @@ type User struct {
 	AccountNumber string    `json:"account_number"`
 	CreatedAt     time.Time `json:"created_at"`
 	Status        int64     `json:"status"`
+}
+
+// Validate ...
+func (u *User) Validate() {
+	validate.Struct(u)
 }

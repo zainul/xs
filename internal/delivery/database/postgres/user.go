@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/zainul/xs/internal/domain"
+	"github.com/zainul/xs/internal/entity"
 	"github.com/zainul/xs/internal/pkg/error/dberror"
 	"github.com/zainul/xs/internal/repository"
 )
@@ -21,7 +21,7 @@ func NewUserRepository(conn *sql.DB) repository.UserRepository {
 	}
 }
 
-func (u *user) Save(user domain.User) error {
+func (u *user) Save(user entity.User) error {
 	query := `INSERT INTO users (
 		email, 
 		username, 
@@ -65,9 +65,9 @@ func (u *user) Save(user domain.User) error {
 
 	return nil
 }
-func (u *user) Edit(user domain.User, email string) error {
+func (u *user) Edit(user entity.User, email string) error {
 	return nil
 }
-func (u *user) GetByField(field interface{}, fieldName string) *domain.User {
+func (u *user) GetByField(field interface{}, fieldName string) *entity.User {
 	return nil
 }

@@ -1,12 +1,12 @@
 package repository
 
 import (
-	"github.com/zainul/xs/internal/domain"
+	"github.com/zainul/xs/internal/entity"
 )
 
 // UserRepository ...
 type UserRepository interface {
-	Save(user domain.User) error
-	Edit(user domain.User, email string) error
-	GetByField(field interface{}, fieldName string) *domain.User
+	Save(user entity.User) error
+	Edit(user entity.User, email string) error
+	GetByField(field interface{}, fieldName string) *entity.User
 }

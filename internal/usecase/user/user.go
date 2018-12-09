@@ -5,7 +5,7 @@ import (
 
 	"github.com/zainul/xs/internal/pkg/validator"
 
-	"github.com/zainul/xs/internal/domain"
+	"github.com/zainul/xs/internal/entity"
 	"github.com/zainul/xs/internal/pkg/error/deliveryerror"
 	"github.com/zainul/xs/internal/pkg/error/usecaseerror"
 	"github.com/zainul/xs/internal/repository"
@@ -23,7 +23,7 @@ func NewUserUseCase(userRepo repository.UserRepository) usecase.User {
 	}
 }
 
-func (u *userUseCase) Register(user domain.User) *deliveryerror.Error {
+func (u *userUseCase) Register(user entity.User) *deliveryerror.Error {
 	// validation must be in here
 	err := validator.Validate(user)
 
@@ -36,7 +36,7 @@ func (u *userUseCase) Register(user domain.User) *deliveryerror.Error {
 	return deliveryerror.GetError(usecaseerror.InternalServerError, errRepo)
 }
 
-func (u *userUseCase) EditProfile(user domain.User) *deliveryerror.Error {
+func (u *userUseCase) EditProfile(user entity.User) *deliveryerror.Error {
 	// validation must be in here
 
 	if userInfo := u.userRepo.GetByField(user.Email, "email"); userInfo != nil {
@@ -54,6 +54,6 @@ func (u *userUseCase) ResetPassword(email string) *deliveryerror.Error {
 	return nil
 }
 
-func (u *userUseCase) DefaultInfo(accountNumber string) *domain.User {
+func (u *userUseCase) DefaultInfo(accountNumber string) *entity.User {
 	return u.userRepo.GetByField(accountNumber, "eamil")
 }

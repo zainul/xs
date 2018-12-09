@@ -5,7 +5,7 @@ import (
 	"net/http"
 
 	"github.com/zainul/xs/internal/delivery/http/types"
-	"github.com/zainul/xs/internal/domain"
+	"github.com/zainul/xs/internal/entity"
 	"github.com/zainul/xs/internal/pkg/error/deliveryerror"
 
 	"github.com/gorilla/mux"
@@ -32,7 +32,7 @@ func NewUserHandler(
 func (u *Userhandler) Register(w http.ResponseWriter, r *http.Request) {
 	response := Response{}
 	body := types.UserRegister{}
-	user := domain.User{}
+	user := entity.User{}
 
 	decoder := json.NewDecoder(r.Body)
 	err := decoder.Decode(&body)

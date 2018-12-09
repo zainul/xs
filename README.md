@@ -2,6 +2,8 @@
 
 ![Alt text](xs.png?raw=true "Clean Architecture")
 
+[![Go Report Card](https://goreportcard.com/badge/github.com/zainul/xs)](https://goreportcard.com/report/github.com/zainul/xs)
+
 XS is golang project starter kit try to follow guideline by Clean Architecture **Uncle Bob**
 
 ![Alt text](clean.jpeg?raw=true "Clean Architecture")

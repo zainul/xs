@@ -3,14 +3,8 @@ package entity
 import (
 	"time"
 
-	validator "gopkg.in/go-playground/validator.v9"
+	xsvalidator "github.com/zainul/xs/internal/pkg/validator"
 )
-
-var validate *validator.Validate
-
-func init() {
-	validate = validator.New()
-}
 
 // User is represented of the user
 type User struct {
@@ -29,6 +23,6 @@ type User struct {
 }
 
 // Validate ...
-func (u *User) Validate() {
-	validate.Struct(u)
+func (u *User) Validate() error {
+	return xsvalidator.Validate(u)
 }

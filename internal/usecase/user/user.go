@@ -3,8 +3,6 @@ package user
 import (
 	"errors"
 
-	"github.com/zainul/xs/internal/pkg/validator"
-
 	"github.com/zainul/xs/internal/entity"
 	"github.com/zainul/xs/internal/pkg/error/deliveryerror"
 	"github.com/zainul/xs/internal/pkg/error/usecaseerror"
@@ -25,11 +23,13 @@ func NewUserUseCase(userRepo repository.UserRepository) usecase.User {
 
 func (u *userUseCase) Register(user entity.User) *deliveryerror.Error {
 	// validation must be in here
-	err := validator.Validate(user)
+	err := user.Validate()
 
 	if err != nil {
 		return deliveryerror.GetError(usecaseerror.ValidationFailed, err)
 	}
+
+	user.AccountNumber = u.userRepo.GenerateAccountNumber()
 
 	errRepo := u.userRepo.Save(user)
 

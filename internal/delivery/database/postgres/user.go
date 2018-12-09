@@ -3,6 +3,7 @@ package postgres
 import (
 	"database/sql"
 	"fmt"
+	"math/rand"
 	"time"
 
 	"github.com/zainul/xs/internal/entity"
@@ -12,6 +13,10 @@ import (
 
 type user struct {
 	DB *sql.DB
+}
+
+func init() {
+	rand.Seed(time.Now().UTC().UnixNano())
 }
 
 // NewUserRepository ...
@@ -70,4 +75,23 @@ func (u *user) Edit(user entity.User, email string) error {
 }
 func (u *user) GetByField(field interface{}, fieldName string) *entity.User {
 	return nil
+}
+
+func (u *user) GenerateAccountNumber() string {
+	// for temporary just random string, should be in storage
+	return randomString(25)
+}
+
+// for temporary just random string, should be in storage
+func randomString(l int) string {
+	bytes := make([]byte, l)
+	for i := 0; i < l; i++ {
+		bytes[i] = byte(randInt(65, 90))
+	}
+	return string(bytes)
+}
+
+// for temporary just random string, should be in storage
+func randInt(min int, max int) int {
+	return min + rand.Intn(max-min)
 }

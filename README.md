@@ -23,21 +23,21 @@ The constraints in the Clean Architecture are :
 - Configs directory is for placed the config file
 
 ### Internal
-- Entity
+- **Entity**
     - Encapsulate enterprise wide business rules. entity in Go is a set of data structures and functions.
 
-- Usecase
+- **Usecase**
     - Usecases is layer contains application specific business rules. It encapsulates and implements all of the use cases of the system 
 
-- Repository
+- **Repository**
     - Repository is layer to communicate between Usecase to storage delivery mechanism
 
-- Delivery
+- **Delivery**
     - Delivery mechanism is package to delivery the output and receive the input from any model of delivery (http, grpc, queue database, UI)
 
-- Mock 
+- **Mock** 
     - Mock package is package for mocking the repository and usecase , it's for testing purpose
     
-- pkg
+- **pkg**
     - Private library for your project
 

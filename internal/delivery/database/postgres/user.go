@@ -3,30 +3,26 @@ package postgres
 import (
 	"database/sql"
 	"fmt"
-	"math/rand"
 	"time"
 
 	"github.com/zainul/xs/internal/entity"
 	"github.com/zainul/xs/internal/pkg/error/dberror"
-	"github.com/zainul/xs/internal/repository"
+	"github.com/zainul/xs/internal/pkg/store/user"
 )
 
-type user struct {
+type userStore struct {
 	DB *sql.DB
 }
 
-func init() {
-	rand.Seed(time.Now().UTC().UnixNano())
-}
-
-// NewUserRepository ...
-func NewUserRepository(conn *sql.DB) repository.UserRepository {
-	return &user{
+// NewUserStore ...
+func NewUserStore(conn *sql.DB) user.Store {
+	return &userStore{
 		DB: conn,
 	}
 }
 
-func (u *user) Save(user entity.User) error {
+func (u *userStore) Save(userParam interface{}) error {
+	user := userParam.(entity.User)
 	query := `INSERT INTO users (
 		email, 
 		username, 
@@ -70,28 +66,21 @@ func (u *user) Save(user entity.User) error {
 
 	return nil
 }
-func (u *user) Edit(user entity.User, email string) error {
+
+func (u *userStore) Edit(userParam interface{}, email string) error {
+	user := userParam.(entity.User)
+	fmt.Println(user)
 	return nil
 }
-func (u *user) GetByField(field interface{}, fieldName string) *entity.User {
+
+func (u *userStore) Delete(v interface{}) error {
 	return nil
 }
 
-func (u *user) GenerateAccountNumber() string {
-	// for temporary just random string, should be in storage
-	return randomString(25)
+func (u *userStore) SomeCustomAction(field string) (*entity.User, error) {
+	return nil, nil
 }
 
-// for temporary just random string, should be in storage
-func randomString(l int) string {
-	bytes := make([]byte, l)
-	for i := 0; i < l; i++ {
-		bytes[i] = byte(randInt(65, 90))
-	}
-	return string(bytes)
-}
-
-// for temporary just random string, should be in storage
-func randInt(min int, max int) int {
-	return min + rand.Intn(max-min)
+func (u *userStore) GetBySomeField(v ...interface{}) (interface{}, error) {
+	return nil, nil
 }

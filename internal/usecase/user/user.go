@@ -29,7 +29,11 @@ func (u *userUseCase) Register(user entity.User) *deliveryerror.Error {
 		return deliveryerror.GetError(usecaseerror.ValidationFailed, err)
 	}
 
-	user.AccountNumber = u.userRepo.GenerateAccountNumber()
+	user.AccountNumber, err = u.userRepo.GenerateAccountNumber()
+
+	if err != nil {
+		return deliveryerror.GetError(usecaseerror.FailedToGenerateAccountNumber, err)
+	}
 
 	errRepo := u.userRepo.Save(user)
 

@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/zainul/xs/internal/delivery/database"
 	"github.com/zainul/xs/internal/entity"
 	"github.com/zainul/xs/internal/pkg/error/dberror"
-	"github.com/zainul/xs/internal/pkg/store/user"
 )
 
 type userStore struct {
@@ -15,14 +15,13 @@ type userStore struct {
 }
 
 // NewUserStore ...
-func NewUserStore(conn *sql.DB) user.Store {
+func NewUserStore(conn *sql.DB) database.UserStore {
 	return &userStore{
 		DB: conn,
 	}
 }
 
-func (u *userStore) Save(userParam interface{}) error {
-	user := userParam.(entity.User)
+func (u *userStore) Save(user entity.User) error {
 	query := `INSERT INTO users (
 		email, 
 		username, 
@@ -67,18 +66,13 @@ func (u *userStore) Save(userParam interface{}) error {
 	return nil
 }
 
-func (u *userStore) Edit(userParam interface{}, email string) error {
-	user := userParam.(entity.User)
+func (u *userStore) Edit(user entity.User, key string) error {
 	fmt.Println(user)
 	return nil
 }
 
 func (u *userStore) Delete(v interface{}) error {
 	return nil
-}
-
-func (u *userStore) SomeCustomAction(field string) (*entity.User, error) {
-	return nil, nil
 }
 
 func (u *userStore) GetBySomeField(v ...interface{}) (interface{}, error) {

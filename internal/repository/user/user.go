@@ -4,9 +4,8 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/zainul/xs/internal/pkg/store/user"
-
 	"github.com/zainul/xs/internal/constant"
+	"github.com/zainul/xs/internal/delivery/database"
 	"github.com/zainul/xs/internal/entity"
 	"github.com/zainul/xs/internal/pkg/cache"
 	"github.com/zainul/xs/internal/pkg/converter"
@@ -15,14 +14,14 @@ import (
 )
 
 type userRepository struct {
-	db      user.Store
+	db      database.UserStore
 	cached  cache.Cache
 	counter counter.Counter
 }
 
 // NewUserRepository ...
 func NewUserRepository(
-	db user.Store,
+	db database.UserStore,
 	cached cache.Cache,
 	counter counter.Counter,
 ) repository.UserRepository {

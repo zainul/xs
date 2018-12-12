@@ -9,10 +9,13 @@ import (
 	"os/signal"
 	"time"
 
+	"github.com/zainul/xs/internal/delivery/cache/redis"
+
 	"github.com/gorilla/mux"
 	"github.com/zainul/xs/internal/delivery/database/postgres"
 	HTTPHandler "github.com/zainul/xs/internal/delivery/http"
 	"github.com/zainul/xs/internal/pkg/initial"
+	userRepository "github.com/zainul/xs/internal/repository/user"
 	"github.com/zainul/xs/internal/usecase/user"
 )
 
@@ -38,7 +41,11 @@ func main() {
 	////////////////////////////// APPLICATION /////////////////////////////////
 	////////////////////////////////////////////////////////////////////////////
 
-	userRepo := postgres.NewUserRepository(db)
+	userDBStore := postgres.NewUserStore(db)
+	userCached := redis.NewCached("someconfig")
+	userCounter := redis.NewCounter("someconfig")
+
+	userRepo := userRepository.NewUserRepository(userDBStore, userCached, userCounter)
 	useCaseUser := user.NewUserUseCase(userRepo)
 	HTTPHandler.NewUserHandler(r, useCaseUser)
 

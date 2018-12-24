@@ -9,11 +9,11 @@ import (
 	"os/signal"
 	"time"
 
-	"github.com/zainul/xs/internal/delivery/cache/redis"
+	"github.com/zainul/xs/internal/gateways/cache/redis"
 
 	"github.com/gorilla/mux"
-	"github.com/zainul/xs/internal/delivery/database/postgres"
 	HTTPHandler "github.com/zainul/xs/internal/delivery/http"
+	"github.com/zainul/xs/internal/gateways/database/postgres"
 	"github.com/zainul/xs/internal/pkg/initial"
 	userRepository "github.com/zainul/xs/internal/repository/user"
 	"github.com/zainul/xs/internal/usecase/user"

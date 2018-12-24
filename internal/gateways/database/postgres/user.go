@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/zainul/xs/internal/delivery/database"
 	"github.com/zainul/xs/internal/entity"
+	"github.com/zainul/xs/internal/gateways/database"
 	"github.com/zainul/xs/internal/pkg/error/dberror"
 )
 

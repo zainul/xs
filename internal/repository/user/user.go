@@ -5,8 +5,8 @@ import (
 	"strconv"
 
 	"github.com/zainul/xs/internal/constant"
-	"github.com/zainul/xs/internal/delivery/database"
 	"github.com/zainul/xs/internal/entity"
+	"github.com/zainul/xs/internal/gateways/database"
 	"github.com/zainul/xs/internal/pkg/cache"
 	"github.com/zainul/xs/internal/pkg/converter"
 	"github.com/zainul/xs/internal/pkg/counter"
